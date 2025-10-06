@@ -1,14 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// PUBLICACION {
-//   uuid id_publicacion PK
-//   varchar titulo
-//   text descripcion
-//   timestamptz fecha_subida
-//   varchar estado
-//   uuid id_usuario FK
-//   uuid id_animal FK
-// }
+
 
 export interface Publicacion {
     id_publicacion: string;

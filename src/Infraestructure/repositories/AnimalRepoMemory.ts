@@ -1,5 +1,5 @@
-import { IAnimalRepo, AnimalCreador, AnimalUpdate} from "../Domain/repositories/ianimal";
-import { Animal, CreadorDeAnimal} from "../Domain/entities/animal";
+import { IAnimalRepo, AnimalCreador, AnimalUpdate} from "../../Domain/repositories/ianimal";
+import { Animal, CreadorDeAnimal} from "../../Domain/entities/animal";
 
 export class AnimalRepoMemory implements IAnimalRepo {
     private animals: Animal[] = [];

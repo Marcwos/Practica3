@@ -1,7 +1,7 @@
-import { AnimalRepoMemory } from "./Infraestructure/AnimalRepoMemory";
-import { UsuarioRepoMemory } from "./Infraestructure/UsuarioRepoMemory";
-import { DonacionRepoMemory } from "./Infraestructure/DonacionRepoMemory";
-import { CompaniaRepoMemory } from "./Infraestructure/CampaniaRepoMemory";
+import { AnimalRepoMemory } from "./Infraestructure/repositories/AnimalRepoMemory";
+import { UsuarioRepoMemory } from "./Infraestructure/repositories/UsuarioRepoMemory";
+import { DonacionRepoMemory } from "./Infraestructure/repositories/DonacionRepoMemory";
+import { CompaniaRepoMemory } from "./Infraestructure/repositories/CampaniaRepoMemory";
 import { AnimalCreador } from "./Domain/repositories/ianimal";
 
 console.log("PRÁCTICA 2\n");

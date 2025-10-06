@@ -1,14 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// SEGUIMIENTO {
-//   uuid id_seguimiento PK
-//   varchar titulo
-//   text observaciones
-//   timestamptz fecha_seguimiento
-//   uuid id_animal FK
-//   uuid id_supervisor FK
-// }
-
 export interface Seguimiento {
     id_seguimiento: string;
     titulo: string;

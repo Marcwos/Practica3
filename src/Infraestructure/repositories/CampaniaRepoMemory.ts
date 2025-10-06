@@ -1,5 +1,5 @@
-import { ICampania, CampaniaCreator, CampaniaUpdater} from "../Domain/repositories/icampania";
-import { Campania, CreadorDeCampania} from "../Domain/entities/campania";
+import { ICampania, CampaniaCreator, CampaniaUpdater} from "../../Domain/repositories/icampania";
+import { Campania, CreadorDeCampania} from "../../Domain/entities/campania";
 
 export class CompaniaRepoMemory implements ICampania {
     private campanias: Campania[] = [];

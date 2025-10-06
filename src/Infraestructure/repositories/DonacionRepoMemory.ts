@@ -1,5 +1,5 @@
-import { IDonacionRepo, DonacionCreador, DonacionUpdate} from "../Domain/repositories/idonacion";
-import { Donacion, CreadorDeDonacion} from "../Domain/entities/donacion";
+import { IDonacionRepo, DonacionCreador, DonacionUpdate} from "../../Domain/repositories/idonacion";
+import { Donacion, CreadorDeDonacion} from "../../Domain/entities/donacion";
 
 export class DonacionRepoMemory implements IDonacionRepo {
     private donaciones: Donacion[] = [];
