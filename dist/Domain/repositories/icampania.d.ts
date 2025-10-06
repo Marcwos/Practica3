@@ -1,8 +1,29 @@
 import { Campania } from "../entities/campania";
+export interface CampaniaCreator {
+    id_tipo_campania: string;
+    titulo: string;
+    descripcion?: string;
+    fecha_inicio: Date;
+    fecha_fin: Date;
+    lugar?: string;
+    organizador?: string;
+    estado: string;
+}
+export interface CampaniaUpdater {
+    id_tipo_campania?: string;
+    titulo?: string;
+    descripcion?: string;
+    fecha_inicio?: Date;
+    fecha_fin?: Date;
+    lugar?: string;
+    organizador?: string;
+    estado?: string;
+}
 export interface ICampania {
-    insert(campania: Campania, callback: (err: Error | null, result?: Campania) => void): void;
-    getById(id: number): Promise<Campania | null>;
-    update(id: number, data: Partial<Campania>): Promise<Campania | null>;
-    delete(id: number): Promise<boolean>;
+    insert(campania: CampaniaCreator, callback: (err: Error | null, result?: Campania) => void): void;
+    getById(id: string): Promise<Campania | null>;
+    getAll(): Promise<Campania[]>;
+    update(id: string, data: CampaniaUpdater): Promise<Campania | null>;
+    delete(id: string): Promise<boolean>;
 }
 //# sourceMappingURL=icampania.d.ts.map

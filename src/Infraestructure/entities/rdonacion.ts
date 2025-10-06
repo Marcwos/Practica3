@@ -10,7 +10,7 @@ export class Donacion {
     @Column({ type: "decimal", precision: 10, scale: 2 })
     monto!: number;
 
-    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     fecha!: Date;
 
     // Foreign Keys

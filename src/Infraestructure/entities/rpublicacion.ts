@@ -14,7 +14,7 @@ export class Publicacion {
     @Column({ nullable: true, type: "text" })
     descripcion?: string;
 
-    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     fecha_subida!: Date;
 
     @Column()

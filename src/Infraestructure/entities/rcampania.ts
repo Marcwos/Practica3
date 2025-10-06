@@ -13,10 +13,10 @@ export class Campania {
     @Column({ nullable: true, type: "text" })
     descripcion?: string;
 
-    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     fecha_inicio!: Date;
 
-    @Column({ type: "timestamptz" })
+    @Column({ type: "datetime" })
     fecha_fin!: Date;
 
     @Column({ nullable: true })

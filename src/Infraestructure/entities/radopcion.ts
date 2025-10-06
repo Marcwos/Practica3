@@ -7,7 +7,7 @@ export class Adopcion {
     @PrimaryGeneratedColumn("uuid")
     id_adopcion!: string;
 
-    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     fecha_adopcion!: Date;
 
     @Column()

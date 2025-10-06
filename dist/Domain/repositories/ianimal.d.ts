@@ -1,24 +1,22 @@
 import { Animal } from "../entities/animal";
 export interface AnimalCreador {
     nombre: string;
-    especie: string;
-    edad: number;
+    id_especie: string;
+    edad: string;
     estado: string;
-    vacunas: string[];
-    descripcion: string;
-    fotos: string[];
-    estadoAdopcion: string;
+    descripcion?: string;
+    fotos?: string[];
+    estado_adopcion: string;
     id_refugio: string;
 }
 export interface AnimalUpdate {
     nombre?: string;
-    especie?: string;
-    edad?: number;
+    id_especie?: string;
+    edad?: string;
     estado?: string;
-    vacunas?: string[];
     descripcion?: string;
     fotos?: string[];
-    estadoAdopcion?: string;
+    estado_adopcion?: string;
     id_refugio?: string;
 }
 export interface IAnimalRepo {

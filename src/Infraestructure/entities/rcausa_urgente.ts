@@ -17,7 +17,7 @@ export class CausaUrgente {
     @Column({ type: "decimal", precision: 10, scale: 2 })
     meta!: number;
 
-    @Column({ type: "timestamptz" })
+    @Column({ type: "datetime" })
     fecha_limite!: Date;
 
     // Foreign Keys

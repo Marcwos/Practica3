@@ -13,7 +13,7 @@ export class Seguimiento {
     @Column({ nullable: true, type: "text" })
     observaciones?: string;
 
-    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     fecha_seguimiento!: Date;
 
     // Foreign Keys

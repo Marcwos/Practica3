@@ -1,14 +1,13 @@
 export interface Animal {
-    id: string;
+    id_animal: string;
     nombre: string;
-    especie: string;
-    edad: number;
+    id_especie: string;
+    edad: string;
     estado: string;
-    vacunas: string[];
-    descripcion: string;
-    fotos: string[];
-    estadoAdopcion: string;
+    descripcion?: string;
+    fotos?: string[];
+    estado_adopcion: string;
     id_refugio: string;
 }
-export declare function CreadorDeAnimal(data: Omit<Animal, "id">): Animal;
+export declare function CreadorDeAnimal(data: Omit<Animal, "id_animal">): Animal;
 //# sourceMappingURL=animal.d.ts.map
