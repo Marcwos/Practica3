@@ -40,6 +40,49 @@ class DonacionRepository {
         const result = await this.repository.delete({ id_donacion: id });
         return (result.affected ?? 0) > 0;
     }
+    // Métodos adicionales específicos para donaciones
+    async findByUsuario(id_usuario) {
+        const donaciones = await this.repository.find({
+            where: { id_usuario },
+            relations: ["usuario", "causa_urgente"]
+        });
+        return donaciones.map(donacion => this.toDomainEntity(donacion));
+    }
+    async findByCausaUrgente(id_causa_urgente) {
+        const donaciones = await this.repository.find({
+            where: { id_causa_urgente },
+            relations: ["usuario", "causa_urgente"]
+        });
+        return donaciones.map(donacion => this.toDomainEntity(donacion));
+    }
+    async findByFechaRango(fechaInicio, fechaFin) {
+        const donaciones = await this.repository
+            .createQueryBuilder("donacion")
+            .where("donacion.fecha >= :fechaInicio", { fechaInicio })
+            .andWhere("donacion.fecha <= :fechaFin", { fechaFin })
+            .leftJoinAndSelect("donacion.usuario", "usuario")
+            .leftJoinAndSelect("donacion.causa_urgente", "causa_urgente")
+            .getMany();
+        return donaciones.map(donacion => this.toDomainEntity(donacion));
+    }
+    async getTotalDonado(id_causa_urgente) {
+        const queryBuilder = this.repository
+            .createQueryBuilder("donacion")
+            .select("SUM(donacion.monto)", "total");
+        if (id_causa_urgente) {
+            queryBuilder.where("donacion.id_causa_urgente = :id_causa_urgente", { id_causa_urgente });
+        }
+        const result = await queryBuilder.getRawOne();
+        return parseFloat(result.total) || 0;
+    }
+    async getTotalDonadoPorUsuario(id_usuario) {
+        const result = await this.repository
+            .createQueryBuilder("donacion")
+            .select("SUM(donacion.monto)", "total")
+            .where("donacion.id_usuario = :id_usuario", { id_usuario })
+            .getRawOne();
+        return parseFloat(result.total) || 0;
+    }
     async createDonacion(donacionData) {
         const rDonacion = this.toInfrastructureEntity(donacionData);
         const savedDonacion = await this.repository.save(rDonacion);
@@ -61,7 +104,6 @@ class DonacionRepository {
     toInfrastructureEntity(donacion) {
         const rDonacion = new rdonacion_1.Donacion();
         rDonacion.monto = donacion.monto;
-        rDonacion.fecha = donacion.fecha;
         rDonacion.id_usuario = donacion.id_usuario;
         // Asignar propiedades opcionales solo si tienen valor
         if (donacion.id_causa_urgente) {

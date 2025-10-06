@@ -49,6 +49,39 @@ export class AnimalRepository implements IAnimalRepo {
         return (result.affected ?? 0) > 0;
     }
 
+    // Métodos adicionales específicos
+    async findByEspecie(id_especie: string): Promise<DomainAnimal[]> {
+        const animales = await this.repository.find({
+            where: { id_especie },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
+
+    async findByRefugio(id_refugio: string): Promise<DomainAnimal[]> {
+        const animales = await this.repository.find({
+            where: { id_refugio },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
+
+    async findBySupervisor(id_supervisor: string): Promise<DomainAnimal[]> {
+        const animales = await this.repository.find({
+            where: { id_supervisor },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
+
+    async findByEstadoAdopcion(estado: string): Promise<DomainAnimal[]> {
+        const animales = await this.repository.find({
+            where: { estado_adopcion: estado },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
+
     private async createAnimal(animalData: AnimalCreador): Promise<DomainAnimal> {
         const rAnimal = this.toInfrastructureEntity(animalData);
         const savedAnimal = await this.repository.save(rAnimal);

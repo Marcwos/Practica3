@@ -5,7 +5,6 @@ export interface UsuarioCreador {
     contrasenia: string;
     telefono?: string;
     direccion?: string;
-    rol: "admin" | "usuario";
 }
 export interface UsuarioUpdate {
     nombre?: string;

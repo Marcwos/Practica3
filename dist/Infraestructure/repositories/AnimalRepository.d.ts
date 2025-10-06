@@ -8,6 +8,10 @@ export declare class AnimalRepository implements IAnimalRepo {
     findAll(): Promise<DomainAnimal[]>;
     update(id: string, data: AnimalUpdate): Promise<DomainAnimal>;
     delete(id: string): Promise<boolean>;
+    findByEspecie(id_especie: string): Promise<DomainAnimal[]>;
+    findByRefugio(id_refugio: string): Promise<DomainAnimal[]>;
+    findBySupervisor(id_supervisor: string): Promise<DomainAnimal[]>;
+    findByEstadoAdopcion(estado: string): Promise<DomainAnimal[]>;
     private createAnimal;
     private toDomainEntity;
     private toInfrastructureEntity;

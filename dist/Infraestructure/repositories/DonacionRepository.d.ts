@@ -8,6 +8,11 @@ export declare class DonacionRepository implements IDonacionRepo {
     findAll(): Promise<DomainDonacion[]>;
     update(id: string, data: DonacionUpdate): Promise<DomainDonacion>;
     delete(id: string): Promise<boolean>;
+    findByUsuario(id_usuario: string): Promise<DomainDonacion[]>;
+    findByCausaUrgente(id_causa_urgente: string): Promise<DomainDonacion[]>;
+    findByFechaRango(fechaInicio: Date, fechaFin: Date): Promise<DomainDonacion[]>;
+    getTotalDonado(id_causa_urgente?: string): Promise<number>;
+    getTotalDonadoPorUsuario(id_usuario: string): Promise<number>;
     private createDonacion;
     private toDomainEntity;
     private toInfrastructureEntity;

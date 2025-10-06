@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], Seguimiento.prototype, "observaciones", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" }),
+    (0, typeorm_1.Column)({ type: "datetime", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], Seguimiento.prototype, "fecha_seguimiento", void 0);
 __decorate([

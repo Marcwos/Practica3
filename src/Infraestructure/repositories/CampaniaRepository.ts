@@ -1,23 +1,23 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { ICampania, CampaniaCreator, CampaniaUpdater } from "../../Domain/repositories/icampania";
+import { ICampaniaRepo, CampaniaCreador, CampaniaUpdate } from "../../Domain/repositories/icampania";
 import { Campania as DomainCampania } from "../../Domain/entities/campania";
 import { Campania as RCampania } from "../entities/rcampania";
 
-export class CampaniaRepository implements ICampania {
+export class CampaniaRepository implements ICampaniaRepo {
     private repository: Repository<RCampania>;
 
     constructor() {
         this.repository = AppDataSource.getRepository(RCampania);
     }
 
-    insert(campania: CampaniaCreator, callback: (err: Error | null, result?: DomainCampania) => void): void {
+    insert(campania: CampaniaCreador, callback: (err: Error | null, result?: DomainCampania) => void): void {
         this.createCampania(campania)
             .then(result => callback(null, result))
             .catch(err => callback(err));
     }
 
-    async getById(id: string): Promise<DomainCampania | null> {
+    async findById(id: string): Promise<DomainCampania | null> {
         const campania = await this.repository.findOne({
             where: { id_campania: id },
             relations: ["tipo_campania"]
@@ -25,21 +25,21 @@ export class CampaniaRepository implements ICampania {
         return campania ? this.toDomainEntity(campania) : null;
     }
 
-    async getAll(): Promise<DomainCampania[]> {
+    async findAll(): Promise<DomainCampania[]> {
         const campanias = await this.repository.find({
             relations: ["tipo_campania"]
         });
-        return campanias.map(this.toDomainEntity);
+        return campanias.map(campania => this.toDomainEntity(campania));
     }
 
-    async update(id: string, data: CampaniaUpdater): Promise<DomainCampania | null> {
+    async update(id: string, data: CampaniaUpdate): Promise<DomainCampania> {
         await this.repository.update({ id_campania: id }, data);
         const updatedCampania = await this.repository.findOne({
             where: { id_campania: id },
             relations: ["tipo_campania"]
         });
         if (!updatedCampania) {
-            return null;
+            throw new Error(`Campania with id ${id} not found`);
         }
         return this.toDomainEntity(updatedCampania);
     }
@@ -49,7 +49,44 @@ export class CampaniaRepository implements ICampania {
         return (result.affected ?? 0) > 0;
     }
 
-    private async createCampania(campaniaData: CampaniaCreator): Promise<DomainCampania> {
+    // Métodos adicionales específicos
+    async findByTipoCampania(id_tipo_campania: string): Promise<DomainCampania[]> {
+        const campanias = await this.repository.find({
+            where: { id_tipo_campania },
+            relations: ["tipo_campania"]
+        });
+        return campanias.map(campania => this.toDomainEntity(campania));
+    }
+
+    async findByEstado(estado: string): Promise<DomainCampania[]> {
+        const campanias = await this.repository.find({
+            where: { estado },
+            relations: ["tipo_campania"]
+        });
+        return campanias.map(campania => this.toDomainEntity(campania));
+    }
+
+    async findByFechaRango(fechaInicio: Date, fechaFin: Date): Promise<DomainCampania[]> {
+        const campanias = await this.repository
+            .createQueryBuilder("campania")
+            .where("campania.fecha_inicio >= :fechaInicio", { fechaInicio })
+            .andWhere("campania.fecha_fin <= :fechaFin", { fechaFin })
+            .leftJoinAndSelect("campania.tipo_campania", "tipo_campania")
+            .getMany();
+        return campanias.map(campania => this.toDomainEntity(campania));
+    }
+
+    async findActivas(): Promise<DomainCampania[]> {
+        const campanias = await this.repository
+            .createQueryBuilder("campania")
+            .where("campania.estado = :estado", { estado: "activa" })
+            .andWhere("campania.fecha_fin >= :now", { now: new Date() })
+            .leftJoinAndSelect("campania.tipo_campania", "tipo_campania")
+            .getMany();
+        return campanias.map(campania => this.toDomainEntity(campania));
+    }
+
+    private async createCampania(campaniaData: CampaniaCreador): Promise<DomainCampania> {
         const rCampania = this.toInfrastructureEntity(campaniaData);
         const savedCampania = await this.repository.save(rCampania);
         return this.toDomainEntity(savedCampania);
@@ -79,7 +116,7 @@ export class CampaniaRepository implements ICampania {
         return domainCampania;
     }
 
-    private toInfrastructureEntity(campania: CampaniaCreator): RCampania {
+    private toInfrastructureEntity(campania: CampaniaCreador): RCampania {
         const rCampania = new RCampania();
         rCampania.titulo = campania.titulo;
         rCampania.id_tipo_campania = campania.id_tipo_campania;

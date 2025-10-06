@@ -4,11 +4,13 @@ import { UsuarioRepository } from "./Infraestructure/repositories/UsuarioReposit
 import { DonacionRepository } from "./Infraestructure/repositories/DonacionRepository";
 import { CampaniaRepository } from "./Infraestructure/repositories/CampaniaRepository";
 
+
+
 async function main() {
     try {
         // Inicializar la conexión a la base de datos
         await AppDataSource.initialize();
-        console.log("Database connected!");
+        console.log("Base de datos levantadas jjjjj");
 
         // Crear instancias de los repositorios TypeORM
         const animalRepo = new AnimalRepository();
@@ -16,21 +18,17 @@ async function main() {
         const donacionRepo = new DonacionRepository();
         const campaniaRepo = new CampaniaRepository();
 
-        console.log("TypeORM Repositories initialized successfully!");
+        console.log("Se inicio typeorm aqui ");
 
-        // Aquí puedes agregar la lógica de tu aplicación
-        // Por ejemplo:
-        // const animals = await animalRepo.findAll();
-        // console.log("Animals in database:", animals.length);
-
-        // const users = await usuarioRepo.findAll();
-        // console.log("Users in database:", users.length);
+        const users = await usuarioRepo.findAll();
+        console.log("Users in database:", users.length);
 
     } catch (error) {
-        console.error("Error during application initialization:", error);
+        console.error("Error durante la inicialización de la aplicación:", error);
     }
 }
 
 main().catch((error) => {
-    console.error("Error during Data Source initialization:", error);
+    console.error("Error durante la inicialización de la fuente de datos:", error);
 });
+

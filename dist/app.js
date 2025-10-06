@@ -9,13 +9,13 @@ async function main() {
     try {
         // Inicializar la conexión a la base de datos
         await data_source_1.AppDataSource.initialize();
-        console.log("Database connected!");
+        console.log("Base de datos levantadas jjjjj");
         // Crear instancias de los repositorios TypeORM
         const animalRepo = new AnimalRepository_1.AnimalRepository();
         const usuarioRepo = new UsuarioRepository_1.UsuarioRepository();
         const donacionRepo = new DonacionRepository_1.DonacionRepository();
         const campaniaRepo = new CampaniaRepository_1.CampaniaRepository();
-        console.log("TypeORM Repositories initialized successfully!");
+        console.log("Se inicio typeorm aqui ");
         // Aquí puedes agregar la lógica de tu aplicación
         // Por ejemplo:
         // const animals = await animalRepo.findAll();
@@ -24,10 +24,10 @@ async function main() {
         // console.log("Users in database:", users.length);
     }
     catch (error) {
-        console.error("Error during application initialization:", error);
+        console.error("Error durante la inicialización de la aplicación:", error);
     }
 }
 main().catch((error) => {
-    console.error("Error during Data Source initialization:", error);
+    console.error("Error durante la inicialización de la fuente de datos:", error);
 });
 //# sourceMappingURL=app.js.map

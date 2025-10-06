@@ -34,7 +34,7 @@ __decorate([
     __metadata("design:type", Number)
 ], CausaUrgente.prototype, "meta", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamptz" }),
+    (0, typeorm_1.Column)({ type: "datetime" }),
     __metadata("design:type", Date)
 ], CausaUrgente.prototype, "fecha_limite", void 0);
 __decorate([

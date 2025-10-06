@@ -30,7 +30,7 @@ __decorate([
     __metadata("design:type", String)
 ], Publicacion.prototype, "descripcion", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" }),
+    (0, typeorm_1.Column)({ type: "datetime", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], Publicacion.prototype, "fecha_subida", void 0);
 __decorate([

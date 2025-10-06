@@ -40,6 +40,35 @@ class AnimalRepository {
         const result = await this.repository.delete({ id_animal: id });
         return (result.affected ?? 0) > 0;
     }
+    // Métodos adicionales específicos
+    async findByEspecie(id_especie) {
+        const animales = await this.repository.find({
+            where: { id_especie },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
+    async findByRefugio(id_refugio) {
+        const animales = await this.repository.find({
+            where: { id_refugio },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
+    async findBySupervisor(id_supervisor) {
+        const animales = await this.repository.find({
+            where: { id_supervisor },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
+    async findByEstadoAdopcion(estado) {
+        const animales = await this.repository.find({
+            where: { estado_adopcion: estado },
+            relations: ["especie", "refugio"]
+        });
+        return animales.map(animal => this.toDomainEntity(animal));
+    }
     async createAnimal(animalData) {
         const rAnimal = this.toInfrastructureEntity(animalData);
         const savedAnimal = await this.repository.save(rAnimal);

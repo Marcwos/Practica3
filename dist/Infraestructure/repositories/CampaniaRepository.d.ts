@@ -1,13 +1,17 @@
-import { ICampania, CampaniaCreator, CampaniaUpdater } from "../../Domain/repositories/icampania";
+import { ICampaniaRepo, CampaniaCreador, CampaniaUpdate } from "../../Domain/repositories/icampania";
 import { Campania as DomainCampania } from "../../Domain/entities/campania";
-export declare class CampaniaRepository implements ICampania {
+export declare class CampaniaRepository implements ICampaniaRepo {
     private repository;
     constructor();
-    insert(campania: CampaniaCreator, callback: (err: Error | null, result?: DomainCampania) => void): void;
-    getById(id: string): Promise<DomainCampania | null>;
-    getAll(): Promise<DomainCampania[]>;
-    update(id: string, data: CampaniaUpdater): Promise<DomainCampania | null>;
+    insert(campania: CampaniaCreador, callback: (err: Error | null, result?: DomainCampania) => void): void;
+    findById(id: string): Promise<DomainCampania | null>;
+    findAll(): Promise<DomainCampania[]>;
+    update(id: string, data: CampaniaUpdate): Promise<DomainCampania>;
     delete(id: string): Promise<boolean>;
+    findByTipoCampania(id_tipo_campania: string): Promise<DomainCampania[]>;
+    findByEstado(estado: string): Promise<DomainCampania[]>;
+    findByFechaRango(fechaInicio: Date, fechaFin: Date): Promise<DomainCampania[]>;
+    findActivas(): Promise<DomainCampania[]>;
     private createCampania;
     private toDomainEntity;
     private toInfrastructureEntity;

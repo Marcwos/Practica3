@@ -29,11 +29,11 @@ __decorate([
     __metadata("design:type", String)
 ], Campania.prototype, "descripcion", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" }),
+    (0, typeorm_1.Column)({ type: "datetime", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], Campania.prototype, "fecha_inicio", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamptz" }),
+    (0, typeorm_1.Column)({ type: "datetime" }),
     __metadata("design:type", Date)
 ], Campania.prototype, "fecha_fin", void 0);
 __decorate([
