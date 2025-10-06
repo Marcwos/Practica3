@@ -1,19 +1,31 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Publicacion } from "./rpublicacion";
+import { Usuario } from "./rusuario";
 
 @Entity({ name: "adopcion" })
-export class radopcion {
+export class Adopcion {
     @PrimaryGeneratedColumn("uuid")
-    id_adopcion: string;
+    id_adopcion!: string;
 
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-
-    @Column()
-    estado: string;
+    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    fecha_adopcion!: Date;
 
     @Column()
-    id_publicacion: string;
+    estado!: string;
+
+    // Foreign Keys
+    @Column()
+    id_publicacion!: string;
 
     @Column()
-    id_usuario: string;
+    id_usuario!: string;
 
+    // Relaciones
+    @ManyToOne(() => Publicacion, (publicacion) => publicacion.adopciones)
+    @JoinColumn({ name: "id_publicacion" })
+    publicacion!: Publicacion;
+
+    @ManyToOne(() => Usuario, (usuario) => usuario.adopciones)
+    @JoinColumn({ name: "id_usuario" })
+    usuario!: Usuario;
 }

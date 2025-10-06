@@ -1,24 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
+import { TipoCampania } from "./rtipo_campania";
+import { Voluntario } from "./rvoluntario";
 
-@Entity()
-export class rcampania {
+@Entity({ name: "campania" })
+export class Campania {
     @PrimaryGeneratedColumn("uuid")
-    id_campania: string;
+    id_campania!: string;
 
     @Column()
-    id_tipo_campania: string;
+    titulo!: string;
 
-    @Column()
-    titulo: string;
-
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: "text" })
     descripcion?: string;
 
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    fecha_inicio: Date;
+    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    fecha_inicio!: Date;
 
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    fecha_fin: Date;
+    @Column({ type: "timestamptz" })
+    fecha_fin!: Date;
 
     @Column({ nullable: true })
     lugar?: string;
@@ -27,5 +26,17 @@ export class rcampania {
     organizador?: string;
 
     @Column()
-    estado: string;
+    estado!: string;
+
+    // Foreign Keys
+    @Column()
+    id_tipo_campania!: string;
+
+    // Relaciones
+    @ManyToOne(() => TipoCampania, (tipo) => tipo.campanias)
+    @JoinColumn({ name: "id_tipo_campania" })
+    tipo_campania!: TipoCampania;
+
+    @OneToMany(() => Voluntario, (voluntario) => voluntario.campania)
+    voluntarios?: Voluntario[];
 }

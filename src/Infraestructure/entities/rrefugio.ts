@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Animal } from "./ranimal";
+import { Supervisor } from "./rsupervisor";
+import { CausaUrgente } from "./rcausa_urgente";
 
 @Entity({name: "refugio"})
 export class Refugio {
@@ -16,4 +19,14 @@ export class Refugio {
 
     @Column({ nullable: true, type: "text" })
     descripcion?: string;
+
+    // Relaciones
+    @OneToMany(() => Animal, (animal) => animal.refugio)
+    animales?: Animal[];
+
+    @OneToMany(() => Supervisor, (supervisor) => supervisor.refugio)
+    supervisores?: Supervisor[];
+
+    @OneToMany(() => CausaUrgente, (causa) => causa.refugio)
+    causas_urgentes?: CausaUrgente[];
 }

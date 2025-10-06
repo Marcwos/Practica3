@@ -1,25 +1,42 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Adopcion } from "./radopcion";
+import { Publicacion } from "./rpublicacion";
+import { Donacion } from "./rdonacion";
+import { Voluntario } from "./rvoluntario";
 
-@Entity()
-export class rcampania {
+@Entity({ name: "usuario" })
+export class Usuario {
     @PrimaryGeneratedColumn("uuid")
-    id_usuario: string;
+    id_usuario!: string;
 
     @Column()
     nombre!: string;
 
-    @Column()
+    @Column({ unique: true })
     email!: string;
 
     @Column()
     contrasenia!: string;
 
-    @Column()
+    @Column({ nullable: true })
     telefono?: string;
 
-    @Column()
+    @Column({ nullable: true })
     direccion?: string;
 
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    fecha_registro: Date;
+    @Column({ type: "date", default: () => "CURRENT_DATE" })
+    fecha_registro!: Date;
+
+    // Relaciones
+    @OneToMany(() => Adopcion, (adopcion) => adopcion.usuario)
+    adopciones?: Adopcion[];
+
+    @OneToMany(() => Publicacion, (publicacion) => publicacion.usuario)
+    publicaciones?: Publicacion[];
+
+    @OneToMany(() => Donacion, (donacion) => donacion.usuario)
+    donaciones?: Donacion[];
+
+    @OneToMany(() => Voluntario, (voluntario) => voluntario.usuario)
+    voluntarios?: Voluntario[];
 }

@@ -1,22 +1,34 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Animal } from "./ranimal";
+import { Supervisor } from "./rsupervisor";
 
-@Entity()
-export class rseguimiento {
+@Entity({ name: "seguimiento" })
+export class Seguimiento {
     @PrimaryGeneratedColumn("uuid")
-    id_seguimiento: string;
+    id_seguimiento!: string;
 
     @Column()
     titulo!: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: "text" })
     observaciones?: string;
 
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    fecha_seguimiento: Date;
+    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    fecha_seguimiento!: Date;
+
+    // Foreign Keys
+    @Column()
+    id_animal!: string;
 
     @Column()
-    id_animal: string;
+    id_supervisor!: string;
 
-    @Column()
-    id_supervisor: string;
+    // Relaciones
+    @ManyToOne(() => Animal, (animal) => animal.seguimientos)
+    @JoinColumn({ name: "id_animal" })
+    animal!: Animal;
+
+    @ManyToOne(() => Supervisor, (supervisor) => supervisor.seguimientos)
+    @JoinColumn({ name: "id_supervisor" })
+    supervisor!: Supervisor;
 }

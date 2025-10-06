@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
+import { Refugio } from "./rrefugio";
+import { Animal } from "./ranimal";
+import { Seguimiento } from "./rseguimiento";
 
 @Entity({ name: "supervisor" })
 export class Supervisor{ 
@@ -11,10 +14,18 @@ export class Supervisor{
     @Column()
     total_animales!: number;
 
-    @Column({ nullable: true })
-    id_refugio?: string; 
+    // Foreign Keys
+    @Column()
+    id_refugio!: string; 
 
-    @Column({ nullable: true })
-    id_animal?: string;
+    // Relaciones
+    @ManyToOne(() => Refugio, (refugio) => refugio.supervisores)
+    @JoinColumn({ name: "id_refugio" })
+    refugio!: Refugio;
 
+    @OneToMany(() => Animal, (animal) => animal.supervisor)
+    animales?: Animal[];
+
+    @OneToMany(() => Seguimiento, (seguimiento) => seguimiento.supervisor)
+    seguimientos?: Seguimiento[];
 }

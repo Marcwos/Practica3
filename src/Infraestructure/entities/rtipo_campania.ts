@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Campania } from "./rcampania";
 
 @Entity({name: "tipo_campania"})
 export class TipoCampania {
@@ -10,4 +11,8 @@ export class TipoCampania {
 
     @Column({ nullable: true, type: "text" })
     descripcion?: string;
+
+    // Relaciones
+    @OneToMany(() => Campania, (campania) => campania.tipo_campania)
+    campanias?: Campania[];
 }

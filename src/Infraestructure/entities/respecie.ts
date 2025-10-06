@@ -1,10 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Animal } from "./ranimal";
 
-@Entity()
-export class rcampania {
+@Entity({ name: "especie" })
+export class Especie {
     @PrimaryGeneratedColumn("uuid")
-    id_campania: string;
+    id_especie!: string;
 
-    @Column()
-    nombre: string;
+    @Column({ unique: true })
+    nombre!: string;
+
+    // Relaciones
+    @OneToMany(() => Animal, (animal) => animal.especie)
+    animales?: Animal[];
 }

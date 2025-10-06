@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Usuario } from "./rusuario";
+import { Campania } from "./rcampania";
 
 @Entity({ name: "voluntario" })
 export class Voluntario {
@@ -11,9 +13,19 @@ export class Voluntario {
     @Column()
     estado!: string;
 
+    // Foreign Keys
     @Column()
-    id_usuario!: string; // FK a USUARIO
+    id_usuario!: string;
 
     @Column()
-    id_campania!: string; // FK a CAMPANIA
+    id_campania!: string;
+
+    // Relaciones
+    @ManyToOne(() => Usuario, (usuario) => usuario.voluntarios)
+    @JoinColumn({ name: "id_usuario" })
+    usuario!: Usuario;
+
+    @ManyToOne(() => Campania, (campania) => campania.voluntarios)
+    @JoinColumn({ name: "id_campania" })
+    campania!: Campania;
 }

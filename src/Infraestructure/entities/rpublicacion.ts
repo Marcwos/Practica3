@@ -1,25 +1,41 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
+import { Usuario } from "./rusuario";
+import { Animal } from "./ranimal";
+import { Adopcion } from "./radopcion";
 
-@Entity()
-export class rcampania {
+@Entity({ name: "publicacion" })
+export class Publicacion {
     @PrimaryGeneratedColumn("uuid")
-    id_publicacion: string;
+    id_publicacion!: string;
 
     @Column()
-    titulo: string;
+    titulo!: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: "text" })
     descripcion?: string;
 
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    fecha_subida: Date;
+    @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+    fecha_subida!: Date;
 
     @Column()
-    estado: string;
+    estado!: string;
+
+    // Foreign Keys
+    @Column()
+    id_usuario!: string;
 
     @Column()
-    id_usuario: string;
+    id_animal!: string;
 
-    @Column()
-    id_animal: string;
+    // Relaciones
+    @ManyToOne(() => Usuario, (usuario) => usuario.publicaciones)
+    @JoinColumn({ name: "id_usuario" })
+    usuario!: Usuario;
+
+    @ManyToOne(() => Animal, (animal) => animal.publicaciones)
+    @JoinColumn({ name: "id_animal" })
+    animal!: Animal;
+
+    @OneToMany(() => Adopcion, (adopcion) => adopcion.publicacion)
+    adopciones?: Adopcion[];
 }
