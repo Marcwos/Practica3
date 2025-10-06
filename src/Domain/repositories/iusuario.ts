@@ -3,17 +3,15 @@ import {Usuario} from "../entities/usuario";
 export interface UsuarioCreador{
     nombre: string;
     email: string;
-    contraseña: string;
+    contrasenia: string;
     telefono?: string;
     direccion?: string;
-    rol: "admin" | "usuario" ;
 }
-
 
 export interface UsuarioUpdate{
     nombre?: string;
     email?: string;
-    contraseña?: string;
+    contrasenia?: string;
     telefono?: string;
     direccion?: string;
 }

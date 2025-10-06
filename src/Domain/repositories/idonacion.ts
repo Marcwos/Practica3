@@ -1,29 +1,13 @@
 import { Donacion } from "../entities/donacion";
 
 export interface DonacionCreador {
-  tipo_donacion: string;
-  descripcion: string;
-  cantidad: number;
-  moneda: string;
-  fecha_donacion: Date;
-  donante: string;
-  beneficiario: string;
-  metodo_pago: string;
-  estado: 'pendiente' | 'completada' | 'cancelada';
-  anonima: boolean;
+  monto: number;
+  id_usuario: string;
+  id_causa_urgente?: string;
 }
 
 export interface DonacionUpdate {
-  tipo_donacion?: string;
-  descripcion?: string;
-  cantidad?: number;
-  moneda?: string;
-  fecha_donacion?: Date;
-  donante?: string;
-  beneficiario?: string;
-  metodo_pago?: string;
-  estado?: 'pendiente' | 'completada' | 'cancelada';
-  anonima?: boolean;
+  monto?: number;
 }
 
 export interface IDonacionRepo {
@@ -34,10 +18,9 @@ export interface IDonacionRepo {
   delete(id: string): Promise<boolean>;
   
   // Métodos adicionales específicos para donaciones
-  findByDonante(donante: string): Promise<Donacion[]>;
-  findByBeneficiario(beneficiario: string): Promise<Donacion[]>;
-  findByEstado(estado: 'pendiente' | 'completada' | 'cancelada'): Promise<Donacion[]>;
+  findByUsuario(id_usuario: string): Promise<Donacion[]>;
+  findByCausaUrgente(id_causa_urgente: string): Promise<Donacion[]>;
   findByFechaRango(fechaInicio: Date, fechaFin: Date): Promise<Donacion[]>;
-  getTotalDonado(beneficiario?: string): Promise<number>;
-  getDonacionesAnonimas(): Promise<Donacion[]>;
+  getTotalDonado(id_causa_urgente?: string): Promise<number>;
+  getTotalDonadoPorUsuario(id_usuario: string): Promise<number>;
 }
