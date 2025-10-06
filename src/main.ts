@@ -8,9 +8,9 @@ import { CampaniaService } from "./Aplication/CampaniaService";
 async function main() {
     try {
         // 1. Inicializar conexión a la base de datos
-        console.log("🔄 Inicializando conexión a la base de datos...");
+        console.log("Inicializando conexión a la base de datos...");
         await AppDataSource.initialize();
-        console.log("✅ Conexión a SQLite establecida exitosamente");
+        console.log("Conexión a SQLite establecida exitosamente");
 
         // 2. Ejecutar seeding de datos
         console.log("\n" + "=".repeat(50));
@@ -33,16 +33,16 @@ async function main() {
         // 4. PROBAR CRUD COMPLETO
         await testCRUDOperations(animalService, usuarioService, donacionService, campaniaService);
 
-        console.log("\n🎉 ¡Todas las pruebas completadas exitosamente!");
+        console.log("\nTodas las pruebas completadas exitosamente!");
 
     } catch (error) {
-        console.error("❌ Error durante la ejecución:", error);
+        console.error("Error durante la ejecución:", error);
         process.exit(1);
     } finally {
         // Cerrar conexión
         if (AppDataSource.isInitialized) {
             await AppDataSource.destroy();
-            console.log("🔒 Conexión a la base de datos cerrada");
+            console.log(" Conexión a la base de datos cerrada");
         }
     }
 }
@@ -54,12 +54,12 @@ async function testCRUDOperations(
     campaniaService: CampaniaService
 ) {
     // ========== TESTING USUARIOS ==========
-    console.log("\n📋 === TESTING USUARIOS ===");
+    console.log("\n=== TESTING USUARIOS ===");
     
     // READ: findAll()
-    console.log("\n🔍 Testing findAll() - Usuarios:");
+    console.log("\n Testing findAll() - Usuarios:");
     const allUsers = await usuarioService.findAll();
-    console.log(`✅ Usuarios encontrados: ${allUsers.length}`);
+    console.log(` Usuarios encontrados: ${allUsers.length}`);
     allUsers.forEach(user => {
         console.log(`   - ${user.nombre} (${user.email})`);
     });
@@ -68,7 +68,7 @@ async function testCRUDOperations(
     if (allUsers.length > 0) {
         console.log("\nTesting findOne() - Usuario:");
         const firstUser = await usuarioService.findOne(allUsers[0].id_usuario);
-        console.log(`✅ Usuario encontrado: ${firstUser?.nombre} - ${firstUser?.email}`);
+        console.log(` Usuario encontrado: ${firstUser?.nombre} - ${firstUser?.email}`);
 
         // UPDATE: update()
         console.log("\n Testing update() - Usuario:");
@@ -131,7 +131,7 @@ async function testCRUDOperations(
         console.log(` Total donado: $${totalDonado}`);
 
         if (allUsers.length > 0) {
-            console.log("\n🔍 Testing findByUsuario():");
+            console.log("\n Testing findByUsuario():");
             const donacionesUsuario = await donacionService.findByUsuario(allUsers[0].id_usuario);
             console.log(` Donaciones del usuario ${allUsers[0].nombre}: ${donacionesUsuario.length}`);
         }

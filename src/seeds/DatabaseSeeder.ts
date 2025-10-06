@@ -26,11 +26,11 @@ export class DatabaseSeeder {
     }
 
     async seedDatabase(): Promise<void> {
-        console.log("🌱 Iniciando proceso de seeding...");
+        console.log("Aqui inicia lo que vendria a ser el seeding");
 
         try {
-            // 1. Crear especies (verificar si ya existen)
-            console.log("📝 Verificando/Creando especies...");
+            // 1. Crear esecies (verificar si ya existen)
+            console.log("Verificando/Creando especies...");
             let especiePerro = await this.especieService.findByNombre("Perro");
             if (!especiePerro) {
                 especiePerro = await this.especieService.create("Perro");
@@ -45,10 +45,10 @@ export class DatabaseSeeder {
             if (!especieConejo) {
                 especieConejo = await this.especieService.create("Conejo");
             }
-            console.log(`✅ Especies disponibles: ${especiePerro.nombre}, ${especieGato.nombre}, ${especieConejo.nombre}`);
+            console.log(` Especies disponibles: ${especiePerro.nombre}, ${especieGato.nombre}, ${especieConejo.nombre}`);
 
             // 2. Crear refugios (verificar si ya existen)
-            console.log("📝 Verificando/Creando refugios...");
+            console.log(" Verificando/Creando refugios...");
             let refugio1 = await this.refugioService.findByNombre("Refugio San Francisco");
             if (!refugio1) {
                 refugio1 = await this.refugioService.create(
@@ -68,10 +68,10 @@ export class DatabaseSeeder {
                     "Centro de rescate y rehabilitación animal"
                 );
             }
-            console.log(`✅ Refugios disponibles: ${refugio1.nombre}, ${refugio2.nombre}`);
+            console.log(`Refugios disponibles: ${refugio1.nombre}, ${refugio2.nombre}`);
 
             // 3. Crear tipos de campaña (verificar si ya existen)
-            console.log("📝 Verificando/Creando tipos de campaña...");
+            console.log(" Verificando/Creando tipos de campaña...");
             let tipoAdopcion = await this.tipoCampaniaService.findByNombre("Adopción");
             if (!tipoAdopcion) {
                 tipoAdopcion = await this.tipoCampaniaService.create(
@@ -87,10 +87,10 @@ export class DatabaseSeeder {
                     "Campañas para recaudar fondos para el refugio"
                 );
             }
-            console.log(`✅ Tipos de campaña disponibles: ${tipoAdopcion.nombre}, ${tipoRecaudacion.nombre}`);
+            console.log(` Tipos de campaña disponibles: ${tipoAdopcion.nombre}, ${tipoRecaudacion.nombre}`);
 
             // 4. Crear usuarios (verificar si ya existen)
-            console.log("📝 Verificando/Creando usuarios...");
+            console.log(" Verificando/Creando usuarios...");
             let usuario1 = await this.usuarioService.findByEmail("maria.gonzalez@email.com");
             if (!usuario1) {
                 usuario1 = await this.usuarioService.create({
@@ -156,10 +156,10 @@ export class DatabaseSeeder {
                 id_especie: especieConejo.id_especie,
                 id_refugio: refugio2.id_refugio
             });
-            console.log(`✅ Animales creados: ${animal1.nombre}, ${animal2.nombre}, ${animal3.nombre}`);
+            console.log(`Animales creados: ${animal1.nombre}, ${animal2.nombre}, ${animal3.nombre}`);
 
             // 6. Crear campañas
-            console.log("📝 Creando campañas...");
+            console.log("Creando campañas...");
             const campania1 = await this.campaniaService.create({
                 titulo: "Adopta un Amigo",
                 descripcion: "Campaña de adopción de mascotas abandonadas",
@@ -181,10 +181,10 @@ export class DatabaseSeeder {
                 estado: "activa",
                 id_tipo_campania: tipoRecaudacion.id_tipo_campania
             });
-            console.log(`✅ Campañas creadas: ${campania1.titulo}, ${campania2.titulo}`);
+            console.log(`Campañas creadas: ${campania1.titulo}, ${campania2.titulo}`);
 
             // 7. Crear donaciones
-            console.log("📝 Creando donaciones...");
+            console.log("Creando donaciones...");
             const donacion1 = await this.donacionService.create({
                 monto: 50.00,
                 id_usuario: usuario1.id_usuario
@@ -199,12 +199,12 @@ export class DatabaseSeeder {
                 monto: 25.00,
                 id_usuario: usuario3.id_usuario
             });
-            console.log(`✅ Donaciones creadas: $${donacion1.monto}, $${donacion2.monto}, $${donacion3.monto}`);
+            console.log(`Donaciones creadas: $${donacion1.monto}, $${donacion2.monto}, $${donacion3.monto}`);
 
-            console.log("🎉 ¡Seeding completado exitosamente!");
+            console.log("¡Seeding completado exitosamente!");
 
         } catch (error) {
-            console.error("❌ Error durante el seeding:", error);
+            console.error( "Error durante el seeding:", error);
             throw error;
         }
     }
