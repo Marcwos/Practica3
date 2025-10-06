@@ -1,7 +1,7 @@
 import { ICampania, CampaniaCreator, CampaniaUpdater} from "../../Domain/repositories/icampania";
 import { Campania, CreadorDeCampania} from "../../Domain/entities/campania";
 
-export class CompaniaRepoMemory implements ICampania {
+export class CampaniaRepoMemory implements ICampania {
     private campanias: Campania[] = [];
 
     constructor() {
@@ -9,106 +9,106 @@ export class CompaniaRepoMemory implements ICampania {
     }
 
     private Campaniasprueba() {
-        const datos_campania = [
+        const datos_campania: Omit<Campania, 'id_campania'>[] = [
         {
-          tipo_campania: "Salud",
+          id_tipo_campania: 'tipo-salud',
           titulo: "Campaña de vacunación",
           descripcion: "Vacunación gratuita para la comunidad",
           fecha_inicio: new Date("2024-07-01"),
           fecha_fin: new Date("2024-07-31"),
           lugar: "Centro Comunitario",
           organizador: "Clínica Local",
-          activo: true
+            estado: 'activo'
        },
        {
-        tipo_campania: "Adopción",
+          id_tipo_campania: 'tipo-adopcion',
         titulo: "Adopta una mascota",
         descripcion: "Campaña para promover la adopción responsable de mascotas",
         fecha_inicio: new Date("2024-08-01"),
         fecha_fin: new Date("2024-08-31"),
         lugar: "Refugio de Animales Municipal",
         organizador: "Protectora de Animales",
-        activo: true
+          estado: 'activo'
        },
        {
-        tipo_campania: "Esterilización",
+          id_tipo_campania: 'tipo-esterilizacion',
         titulo: "Campaña de esterilización gratuita",
         descripcion: "Esterilización gratuita para perros y gatos de bajos recursos",
         fecha_inicio: new Date("2024-09-15"),
         fecha_fin: new Date("2024-09-30"),
         lugar: "Clínica Veterinaria Central",
         organizador: "Colegio de Veterinarios",
-        activo: true
+          estado: 'activo'
        },
        {
-        tipo_campania: "Educación",
+          id_tipo_campania: 'tipo-educacion',
         titulo: "Cuidado responsable de mascotas",
         descripcion: "Talleres educativos sobre cuidado y tenencia responsable",
         fecha_inicio: new Date("2024-10-01"),
         fecha_fin: new Date("2024-10-15"),
         lugar: "Centro Educativo San José",
         organizador: "Fundación Amor Animal",
-        activo: false
+          estado: 'inactivo'
        },
        {
-        tipo_campania: "Rescate",
+          id_tipo_campania: 'tipo-rescate',
         titulo: "Operación rescate de animales callejeros",
         descripcion: "Rescate y rehabilitación de animales en situación de calle",
         fecha_inicio: new Date("2024-06-01"),
         fecha_fin: new Date("2024-12-31"),
         lugar: "Toda la ciudad",
         organizador: "Red de Rescatistas",
-        activo: true
+          estado: 'activo'
       },
       {
-        tipo_campania: "Donación",
+          id_tipo_campania: 'tipo-donacion',
         titulo: "Recolección de alimento para refugios",
         descripcion: "Campaña para recolectar alimento y medicinas para refugios",
         fecha_inicio: new Date("2024-11-01"),
         fecha_fin: new Date("2024-11-30"),
         lugar: "Supermercados participantes",
         organizador: "Alianza de Refugios",
-        activo: true
+          estado: 'activo'
       },
       {
-        tipo_campania: "Salud", 
+          id_tipo_campania: 'tipo-salud', 
         titulo: "Jornada de desparasitación",
         descripcion: "Desparasitación gratuita para mascotas de la comunidad",
         fecha_inicio: new Date("2024-05-15"),
         fecha_fin: new Date("2024-05-31"),
         lugar: "Plaza Principal",
         organizador: "Municipalidad",
-        activo: false
+          estado: 'inactivo'
       },
       {
-        tipo_campania: "Adopción",
+          id_tipo_campania: 'tipo-adopcion',
         titulo: "Feria de adopción navideña",
         descripcion: "Evento especial de adopción durante las fiestas navideñas",
         fecha_inicio: new Date("2024-12-15"),
         fecha_fin: new Date("2024-12-24"),
         lugar: "Centro Comercial Plaza Norte",
         organizador: "Hogar de Animales Esperanza",
-        activo: true
+          estado: 'activo'
       },
       {
-        tipo_campania: "Concientización",
+          id_tipo_campania: 'tipo-concientizacion',
         titulo: "No al maltrato animal",
         descripcion: "Campaña de concientización contra el maltrato animal",
         fecha_inicio: new Date("2024-04-01"),
         fecha_fin: new Date("2024-04-30"),
         lugar: "Universidades y colegios",
         organizador: "Movimiento Defensores Animales",
-        activo: false
+          estado: 'inactivo'
       },
       {
-        tipo_campania: "Rehabilitación",
+          id_tipo_campania: 'tipo-rehabilitacion',
         titulo: "Centro de rehabilitación de fauna silvestre",
         descripcion: "Apoyo para la rehabilitación de animales silvestres heridos",
         fecha_inicio: new Date("2024-03-01"),
         fecha_fin: new Date("2024-12-31"),
         lugar: "Reserva Natural Los Cedros",
         organizador: "SERNANP",
-        activo: true
+          estado: 'activo'
       }
     ];
 
@@ -175,17 +175,17 @@ export class CompaniaRepoMemory implements ICampania {
             return reject(new Error("Error al obtener la campaña existente"));
           }
 
-          const campaniaActualizada: Campania = {
+          const campaniaActualizada = {
             id_campania: campaniaExistente.id_campania,
-            tipo_campania: data.tipo_campania ?? campaniaExistente.tipo_campania,
+            id_tipo_campania: data.id_tipo_campania ?? campaniaExistente.id_tipo_campania,
             titulo: data.titulo ?? campaniaExistente.titulo,
             descripcion: data.descripcion ?? campaniaExistente.descripcion,
             fecha_inicio: data.fecha_inicio ?? campaniaExistente.fecha_inicio,
             fecha_fin: data.fecha_fin ?? campaniaExistente.fecha_fin,
             lugar: data.lugar ?? campaniaExistente.lugar,
             organizador: data.organizador ?? campaniaExistente.organizador,
-            activo: data.activo ?? campaniaExistente.activo
-          };
+            estado: data.estado ?? campaniaExistente.estado
+          } as Campania;
 
           this.campanias[index] = campaniaActualizada;
           resolve(campaniaActualizada);

@@ -10,116 +10,16 @@ export class AnimalRepoMemory implements IAnimalRepo {
 
     private Animalestontos() {
         const datos = [
-            {
-                nombre: "Firulais",
-                especie: "Perro",
-                edad: 5,
-                estado: "Saludable",
-                vacunas: ["Rabia", "Parvovirus"],
-                descripcion: "Un perro muy amigable",
-                fotos: ["foto1.jpg"],
-                estadoAdopcion: "Disponible",
-                id_refugio: "refugio1"
-            },
-            {
-                nombre: "Luna",
-                especie: "Gato",
-                edad: 3,
-                estado: "Saludable",
-                vacunas: ["Triple Felina", "Rabia"],
-                descripcion: "Gata muy cariñosa y juguetona",
-                fotos: ["luna1.jpg", "luna2.jpg"],
-                estadoAdopcion: "Disponible",
-                id_refugio: "refugio2"
-            },
-            {
-                nombre: "Max",
-                especie: "Perro",
-                edad: 2,
-                estado: "En tratamiento",
-                vacunas: ["Rabia"],
-                descripcion: "Cachorro energético, necesita entrenamiento",
-                fotos: ["max1.jpg"],
-                estadoAdopcion: "En proceso",
-                id_refugio: "refugio1"
-            },
-            {
-                nombre: "Mimi",
-                especie: "Gato",
-                edad: 7,
-                estado: "Saludable",
-                vacunas: ["Triple Felina", "Leucemia Felina"],
-                descripcion: "Gata mayor muy tranquila, ideal para apartamento",
-                fotos: ["mimi1.jpg", "mimi2.jpg", "mimi3.jpg"],
-                estadoAdopcion: "Disponible",
-                id_refugio: "refugio3"
-            },
-            {
-                nombre: "Rocky",
-                especie: "Perro",
-                edad: 4,
-                estado: "Saludable",
-                vacunas: ["Rabia", "Parvovirus", "Moquillo"],
-                descripcion: "Perro guardián muy leal y protector",
-                fotos: ["rocky1.jpg"],
-                estadoAdopcion: "Adoptado",
-                id_refugio: "refugio2"
-            },
-            {
-                nombre: "Nala",
-                especie: "Gato",
-                edad: 1,
-                estado: "Saludable",
-                vacunas: ["Triple Felina"],
-                descripcion: "Gatita bebé muy curiosa y activa",
-                fotos: ["nala1.jpg", "nala2.jpg"],
-                estadoAdopcion: "Disponible",
-                id_refugio: "refugio1"
-            },
-            {
-                nombre: "Toby",
-                especie: "Perro",
-                edad: 6,
-                estado: "Saludable",
-                vacunas: ["Rabia", "Parvovirus", "Hepatitis"],
-                descripcion: "Perro maduro muy obediente y calmado",
-                fotos: ["toby1.jpg"],
-                estadoAdopcion: "En proceso",
-                id_refugio: "refugio3"
-            },
-            {
-                nombre: "Simba",
-                especie: "Gato",
-                edad: 4,
-                estado: "Saludable",
-                vacunas: ["Triple Felina", "Rabia", "Leucemia Felina"],
-                descripcion: "Gato grande y majestuoso, muy independiente",
-                fotos: ["simba1.jpg", "simba2.jpg"],
-                estadoAdopcion: "Disponible",
-                id_refugio: "refugio2"
-            },
-            {
-                nombre: "Bella",
-                especie: "Perro",
-                edad: 3,
-                estado: "Saludable",
-                vacunas: ["Rabia", "Parvovirus"],
-                descripcion: "Perra muy dulce y sociable con niños",
-                fotos: ["bella1.jpg", "bella2.jpg", "bella3.jpg"],
-                estadoAdopcion: "Disponible",
-                id_refugio: "refugio1"
-            },
-            {
-                nombre: "Coco",
-                especie: "Gato",
-                edad: 5,
-                estado: "En tratamiento",
-                vacunas: ["Triple Felina"],
-                descripcion: "Gato rescatado, en recuperación pero muy amoroso",
-                fotos: ["coco1.jpg"],
-                estadoAdopcion: "No disponible",
-                id_refugio: "refugio3"
-            }
+            { nombre: "Firulais", id_especie: "especie-perro", edad: "5", estado: "Saludable", descripcion: "Un perro muy amigable", fotos: ["foto1.jpg"], estado_adopcion: "Disponible", id_refugio: "refugio1" },
+            { nombre: "Luna", id_especie: "especie-gato", edad: "3", estado: "Saludable", descripcion: "Gata muy cariñosa y juguetona", fotos: ["luna1.jpg", "luna2.jpg"], estado_adopcion: "Disponible", id_refugio: "refugio2" },
+            { nombre: "Max", id_especie: "especie-perro", edad: "2", estado: "En tratamiento", descripcion: "Cachorro energético, necesita entrenamiento", fotos: ["max1.jpg"], estado_adopcion: "En proceso", id_refugio: "refugio1" },
+            { nombre: "Mimi", id_especie: "especie-gato", edad: "7", estado: "Saludable", descripcion: "Gata mayor muy tranquila, ideal para apartamento", fotos: ["mimi1.jpg", "mimi2.jpg", "mimi3.jpg"], estado_adopcion: "Disponible", id_refugio: "refugio3" },
+            { nombre: "Rocky", id_especie: "especie-perro", edad: "4", estado: "Saludable", descripcion: "Perro guardián muy leal y protector", fotos: ["rocky1.jpg"], estado_adopcion: "Adoptado", id_refugio: "refugio2" },
+            { nombre: "Nala", id_especie: "especie-gato", edad: "1", estado: "Saludable", descripcion: "Gatita bebé muy curiosa y activa", fotos: ["nala1.jpg", "nala2.jpg"], estado_adopcion: "Disponible", id_refugio: "refugio1" },
+            { nombre: "Toby", id_especie: "especie-perro", edad: "6", estado: "Saludable", descripcion: "Perro maduro muy obediente y calmado", fotos: ["toby1.jpg"], estado_adopcion: "En proceso", id_refugio: "refugio3" },
+            { nombre: "Simba", id_especie: "especie-gato", edad: "4", estado: "Saludable", descripcion: "Gato grande y majestuoso, muy independiente", fotos: ["simba1.jpg", "simba2.jpg"], estado_adopcion: "Disponible", id_refugio: "refugio2" },
+            { nombre: "Bella", id_especie: "especie-perro", edad: "3", estado: "Saludable", descripcion: "Perra muy dulce y sociable con niños", fotos: ["bella1.jpg", "bella2.jpg", "bella3.jpg"], estado_adopcion: "Disponible", id_refugio: "refugio1" },
+            { nombre: "Coco", id_especie: "especie-gato", edad: "5", estado: "En tratamiento", descripcion: "Gato rescatado, en recuperación pero muy amoroso", fotos: ["coco1.jpg"], estado_adopcion: "No disponible", id_refugio: "refugio3" }
         ];
         
         // Usa el factory para crear con ID automático
@@ -164,7 +64,7 @@ export class AnimalRepoMemory implements IAnimalRepo {
     async findById(id: string): Promise<Animal | null> {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const animal = this.animals.find(a => a.id === id) || null;
+                const animal = this.animals.find(a => a.id_animal === id) || null;
                 resolve(animal);
             }, 500);
         });
@@ -189,7 +89,7 @@ export class AnimalRepoMemory implements IAnimalRepo {
                         return reject(new Error("Los datos que se van a actualizar son requeridos"))
                     }
                     //Buscar el animal por ID(se crea una nueva busqueda para evitar conflictos)
-                    const indice= this.animals.findIndex(a => a.id === id);
+                    const indice= this.animals.findIndex(a => a.id_animal === id);
                     if (indice === -1) {
                         return reject(new Error("No se pudo encontrar el animal con el ID proporcionado"));
     
@@ -200,7 +100,7 @@ export class AnimalRepoMemory implements IAnimalRepo {
                     //Ahora se verifica si el animal esta duplicado
                     if (data.nombre){
                         const animalDuplicado = this.animals.some(
-                            a => a.id !== id && 
+                            a => a.id_animal !== id && 
                             a.nombre.toLowerCase() === data.nombre!.toLowerCase() &&
                             a.id_refugio === (data.id_refugio || animalActual.id_refugio)
                         );
@@ -210,18 +110,17 @@ export class AnimalRepoMemory implements IAnimalRepo {
                     }
                     
                     // Crear el animal actualizado con todos los campos requeridos
-                    const animalActualizado: Animal = {
-                        id: animalActual.id, // Preservar el ID original
+                    const animalActualizado = {
+                        id_animal: animalActual.id_animal, // Preservar el ID original
                         nombre: data.nombre ?? animalActual.nombre,
-                        especie: data.especie ?? animalActual.especie,
+                        id_especie: data.id_especie ?? animalActual.id_especie,
                         edad: data.edad ?? animalActual.edad,
                         estado: data.estado ?? animalActual.estado,
-                        vacunas: data.vacunas ?? animalActual.vacunas,
                         descripcion: data.descripcion ?? animalActual.descripcion,
                         fotos: data.fotos ?? animalActual.fotos,
-                        estadoAdopcion: data.estadoAdopcion ?? animalActual.estadoAdopcion,
+                        estado_adopcion: data.estado_adopcion ?? animalActual.estado_adopcion,
                         id_refugio: data.id_refugio ?? animalActual.id_refugio
-                    };
+                    } as Animal;
 
                     // Guardar los cambios en el array
                     this.animals[indice] = animalActualizado;
@@ -252,7 +151,7 @@ export class AnimalRepoMemory implements IAnimalRepo {
                     }
 
                     // Buscar el animal
-                    const index = this.animals.findIndex(a => a.id === id);
+                    const index = this.animals.findIndex(a => a.id_animal === id);
                     if (index === -1) {
                         return resolve(false); // No encontrado, pero no es error
                     }

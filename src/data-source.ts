@@ -13,4 +13,6 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: true,
   entities: [Animal, Campania, Donacion, Especie, Refugio, TipoCampania, Usuario],
+  migrations: [],
+  subscribers: [],
 });

@@ -1,6 +1,7 @@
 import { Animal } from "../entities/animal";
 
-export interface AnimalCreador{
+// Ajustado a la interfaz de dominio Animal (ver src/Domain/entities/animal.ts)
+export interface AnimalCreador {
   nombre: string;
   edad: string;
   estado: string;
@@ -12,7 +13,7 @@ export interface AnimalCreador{
   id_supervisor?: string;
 }
 
-export interface AnimalUpdate{
+export interface AnimalUpdate {
   nombre?: string;
   edad?: string;
   estado?: string;
@@ -25,8 +26,8 @@ export interface AnimalUpdate{
 }
 
 export interface IAnimalRepo {
-  insert(animal: AnimalCreador, callback: (err: Error | null, result?: Animal) => void): void; 
-  findById(id: string): Promise<Animal | null>; 
+  insert(animal: AnimalCreador, callback: (err: Error | null, result?: Animal) => void): void;
+  findById(id: string): Promise<Animal | null>;
   findAll(): Promise<Animal[]>;
   update(id: string, data: AnimalUpdate): Promise<Animal>; 
   delete(id: string): Promise<boolean>;
