@@ -121,85 +121,140 @@ export class DatabaseSeeder {
                     contrasenia: "password789"
                 });
             }
-            console.log(`✅ Usuarios disponibles: ${usuario1.nombre}, ${usuario2.nombre}, ${usuario3.nombre}`);
+            console.log(` Usuarios disponibles: ${usuario1.nombre}, ${usuario2.nombre}, ${usuario3.nombre}`);
 
-            // 5. Crear animales
-            console.log("📝 Creando animales...");
-            const animal1 = await this.animalService.create({
-                nombre: "Max",
-                edad: "2 años",
-                estado: "Saludable",
-                descripcion: "Perro muy amigable y juguetón",
-                fotos: ["max1.jpg", "max2.jpg"],
-                estado_adopcion: "Disponible",
-                id_especie: especiePerro.id_especie,
-                id_refugio: refugio1.id_refugio
-            });
+            // 5. Verificar/Crear animales
+            console.log(" Verificando/Creando animales...");
+            const allAnimals = await this.animalService.findAll();
+            
+            let animal1, animal2, animal3;
+            
+            // Verificar si los animales ya existen por nombre
+            const existingMax = allAnimals.find(a => a.nombre === "Max");
+            if (!existingMax) {
+                animal1 = await this.animalService.create({
+                    nombre: "Max",
+                    edad: "2 años",
+                    estado: "Saludable",
+                    descripcion: "Perro muy amigable y juguetón",
+                    fotos: ["max1.jpg", "max2.jpg"],
+                    estado_adopcion: "Disponible",
+                    id_especie: especiePerro.id_especie,
+                    id_refugio: refugio1.id_refugio
+                });
+                console.log(`    Animal creado: ${animal1.nombre}`);
+            } else {
+                animal1 = existingMax;
+                console.log(`     Animal existente: ${animal1.nombre}`);
+            }
 
-            const animal2 = await this.animalService.create({
-                nombre: "Luna",
-                edad: "1 año",
-                estado: "Saludable",
-                descripcion: "Gata muy cariñosa y tranquila",
-                fotos: ["luna1.jpg"],
-                estado_adopcion: "Disponible",
-                id_especie: especieGato.id_especie,
-                id_refugio: refugio1.id_refugio
-            });
+            const existingLuna = allAnimals.find(a => a.nombre === "Luna");
+            if (!existingLuna) {
+                animal2 = await this.animalService.create({
+                    nombre: "Luna",
+                    edad: "1 año",
+                    estado: "Saludable",
+                    descripcion: "Gata muy cariñosa y tranquila",
+                    fotos: ["luna1.jpg"],
+                    estado_adopcion: "Disponible",
+                    id_especie: especieGato.id_especie,
+                    id_refugio: refugio1.id_refugio
+                });
+                console.log(`    Animal creado: ${animal2.nombre}`);
+            } else {
+                animal2 = existingLuna;
+                console.log(`     Animal existente: ${animal2.nombre}`);
+            }
 
-            const animal3 = await this.animalService.create({
-                nombre: "Coco",
-                edad: "6 meses",
-                estado: "En tratamiento",
-                descripcion: "Conejo rescatado, necesita cuidados especiales",
-                estado_adopcion: "No disponible",
-                id_especie: especieConejo.id_especie,
-                id_refugio: refugio2.id_refugio
-            });
-            console.log(`Animales creados: ${animal1.nombre}, ${animal2.nombre}, ${animal3.nombre}`);
+            const existingCoco = allAnimals.find(a => a.nombre === "Coco");
+            if (!existingCoco) {
+                animal3 = await this.animalService.create({
+                    nombre: "Coco",
+                    edad: "6 meses",
+                    estado: "En tratamiento",
+                    descripcion: "Conejo rescatado, necesita cuidados especiales",
+                    estado_adopcion: "No disponible",
+                    id_especie: especieConejo.id_especie,
+                    id_refugio: refugio2.id_refugio
+                });
+                console.log(`    Animal creado: ${animal3.nombre}`);
+            } else {
+                animal3 = existingCoco;
+                console.log(`     Animal existente: ${animal3.nombre}`);
+            }
+            console.log(` Animales disponibles: ${animal1.nombre}, ${animal2.nombre}, ${animal3.nombre}`);
 
-            // 6. Crear campañas
-            console.log("Creando campañas...");
-            const campania1 = await this.campaniaService.create({
-                titulo: "Adopta un Amigo",
-                descripcion: "Campaña de adopción de mascotas abandonadas",
-                fecha_inicio: new Date(),
-                fecha_fin: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 días
-                lugar: "Refugio San Francisco",
-                organizador: "María González",
-                estado: "activa",
-                id_tipo_campania: tipoAdopcion.id_tipo_campania
-            });
+            // 6. Verificar/Crear campañas
+            console.log("Verificando/Creando campañas...");
+            const allCampaigns = await this.campaniaService.findAll();
+            
+            let campania1, campania2;
+            
+            const existingAdopcion = allCampaigns.find(c => c.titulo === "Adopta un Amigo");
+            if (!existingAdopcion) {
+                campania1 = await this.campaniaService.create({
+                    titulo: "Adopta un Amigo",
+                    descripcion: "Campaña de adopción de mascotas abandonadas",
+                    fecha_inicio: new Date(),
+                    fecha_fin: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 días
+                    lugar: "Refugio San Francisco",
+                    organizador: "María González",
+                    estado: "activa",
+                    id_tipo_campania: tipoAdopcion.id_tipo_campania
+                });
+                console.log(`    Campaña creada: ${campania1.titulo}`);
+            } else {
+                campania1 = existingAdopcion;
+                console.log(`     Campaña existente: ${campania1.titulo}`);
+            }
 
-            const campania2 = await this.campaniaService.create({
-                titulo: "Ayuda a Coco",
-                descripcion: "Recaudación de fondos para el tratamiento médico de Coco",
-                fecha_inicio: new Date(),
-                fecha_fin: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 días
-                lugar: "Hogar Animal",
-                organizador: "Carlos Rodríguez",
-                estado: "activa",
-                id_tipo_campania: tipoRecaudacion.id_tipo_campania
-            });
-            console.log(`Campañas creadas: ${campania1.titulo}, ${campania2.titulo}`);
+            const existingRecaudacion = allCampaigns.find(c => c.titulo === "Ayuda a Coco");
+            if (!existingRecaudacion) {
+                campania2 = await this.campaniaService.create({
+                    titulo: "Ayuda a Coco",
+                    descripcion: "Recaudación de fondos para el tratamiento médico de Coco",
+                    fecha_inicio: new Date(),
+                    fecha_fin: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 días
+                    lugar: "Hogar Animal",
+                    organizador: "Carlos Rodríguez",
+                    estado: "activa",
+                    id_tipo_campania: tipoRecaudacion.id_tipo_campania
+                });
+                console.log(`    Campaña creada: ${campania2.titulo}`);
+            } else {
+                campania2 = existingRecaudacion;
+                console.log(`     Campaña existente: ${campania2.titulo}`);
+            }
+            console.log(` Campañas disponibles: ${campania1.titulo}, ${campania2.titulo}`);
 
-            // 7. Crear donaciones
-            console.log("Creando donaciones...");
-            const donacion1 = await this.donacionService.create({
-                monto: 50.00,
-                id_usuario: usuario1.id_usuario
-            });
+            // 7. Verificar/Crear donaciones
+            console.log(" Verificando/Creando donaciones...");
+            const allDonations = await this.donacionService.findAll();
+            
+            // Solo crear donaciones si no hay suficientes (menos de 3 donaciones base)
+            const donationsNeeded = Math.max(0, 3 - allDonations.length);
+            
+            if (donationsNeeded > 0) {
+                const donationsToCreate = [
+                    { monto: 50.00, id_usuario: usuario1.id_usuario },
+                    { monto: 100.00, id_usuario: usuario2.id_usuario },
+                    { monto: 25.00, id_usuario: usuario3.id_usuario }
+                ];
 
-            const donacion2 = await this.donacionService.create({
-                monto: 100.00,
-                id_usuario: usuario2.id_usuario
-            });
-
-            const donacion3 = await this.donacionService.create({
-                monto: 25.00,
-                id_usuario: usuario3.id_usuario
-            });
-            console.log(`Donaciones creadas: $${donacion1.monto}, $${donacion2.monto}, $${donacion3.monto}`);
+                for (let i = 0; i < donationsNeeded && i < donationsToCreate.length; i++) {
+                    const donacionData = donationsToCreate[i];
+                    if (donacionData) {
+                        const donacion = await this.donacionService.create(donacionData);
+                        console.log(`    Donación creada: $${donacion.monto}`);
+                    }
+                }
+                console.log(` ${donationsNeeded} donaciones creadas`);
+            } else {
+                console.log(`  Ya existen ${allDonations.length} donaciones, no se crean nuevas`);
+            }
+            
+            const finalDonationCount = await this.donacionService.findAll();
+            console.log(`Total donaciones disponibles: ${finalDonationCount.length}`);
 
             console.log("¡Seeding completado exitosamente!");
 
