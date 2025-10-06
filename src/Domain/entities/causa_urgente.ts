@@ -1,14 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// CAUSA_URGENTE {
-//   uuid id_causa_urgente PK
-//   varchar titulo
-//   text descripcion
-//   numeric meta
-//   timestamptz fecha_limite
-//   uuid id_refugio FK
-//   uuid id_animal FK
-// }
 
 export interface CausaUrgente {
     id_causa_urgente: string;

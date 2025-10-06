@@ -1,13 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// SUPERVISOR {
-//   uuid id_supervisor PK
-//   varchar nombre
-//   int total_animales
-//   uuid id_refugio FK
-//   uuid id_animal FK
-// }
-
 export interface Supervisor {
     id_supervisor: string;
     nombre: string;

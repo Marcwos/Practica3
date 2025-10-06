@@ -1,13 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// REFUGIO {
-//   uuid id_refugio PK
-//   varchar nombre
-//   varchar direccion
-//   varchar telefono
-//   text descripcion
-// }
-
 export interface Refugio {
     id_refugio: string;
     nombre: string;
