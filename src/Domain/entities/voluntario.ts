@@ -1,13 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// VOLUNTARIO {
-//   uuid id_voluntario PK
-//   varchar rol
-//   varchar estado
-//   uuid id_usuario FK
-//   uuid id_campania FK
-// }
-
 export interface Voluntario {
     id_voluntario: string;
     rol: string;

@@ -9,86 +9,16 @@ export class UsuarioRepoMemory implements IUsuarioRepo {
     }
     private UsuariosPrueba() {
         const datos_usuarios = [
-        {   
-            nombre: "Maria Gomez",
-            email: "maria.gomez@example.com",
-            contraseña: "password123",
-            telefono: "0983884849",
-            direccion: "Calle Falsa 123",
-            rol: "admin" as const
-        },
-        {
-            nombre: "Carlos Rodriguez",
-            email: "carlos.rodriguez@example.com",
-            contraseña: "password456",
-            telefono: "0987654321",
-            direccion: "Av. Principal 456",
-            rol: "usuario" as const
-        },
-        {
-            nombre: "Ana Martinez",
-            email: "ana.martinez@example.com",
-            contraseña: "password789",
-            telefono: "0981234567",
-            direccion: "Plaza Central 789",
-            rol: "usuario" as const
-        },
-        {
-            nombre: "Luis Garcia",
-            email: "luis.garcia@example.com",
-            contraseña: "password101",
-            telefono: "0986789012",
-            direccion: "Barrio Norte 101",
-            rol: "usuario" as const
-        },
-        {
-            nombre: "Sofia Hernandez",
-            email: "sofia.hernandez@example.com",
-            contraseña: "password202",
-            telefono: "0985432109",
-            direccion: "Zona Sur 202",
-            rol: "usuario" as const
-        },
-        {
-            nombre: "Miguel Torres",
-            email: "miguel.torres@example.com",
-            contraseña: "password303",
-            telefono: "0984567890",
-            direccion: "Sector Este 303",
-            rol: "admin" as const
-        },
-        {
-            nombre: "Carmen Lopez",
-            email: "carmen.lopez@example.com",
-            contraseña: "password404",
-            telefono: "0983456789",
-            direccion: "Colonia Oeste 404",
-            rol: "usuario" as const
-        },
-        {
-            nombre: "Roberto Silva",
-            email: "roberto.silva@example.com",
-            contraseña: "password505",
-            telefono: "0982345678",
-            direccion: "Centro Histórico 505",
-            rol: "usuario" as const
-        },
-        {
-            nombre: "Patricia Morales",
-            email: "patricia.morales@example.com",
-            contraseña: "password606",
-            telefono: "0981234098",
-            direccion: "Residencial 606",
-            rol: "usuario" as const
-        },
-        {
-            nombre: "Diego Vargas",
-            email: "diego.vargas@example.com",
-            contraseña: "password707",
-            telefono: "0980987654",
-            direccion: "Urbanización 707",
-            rol: "usuario" as const
-        }
+        { nombre: "Maria Gomez", email: "maria.gomez@example.com", contrasenia: "password123", telefono: "0983884849", direccion: "Calle Falsa 123", rol: "admin" as const },
+        { nombre: "Carlos Rodriguez", email: "carlos.rodriguez@example.com", contrasenia: "password456", telefono: "0987654321", direccion: "Av. Principal 456", rol: "usuario" as const },
+        { nombre: "Ana Martinez", email: "ana.martinez@example.com", contrasenia: "password789", telefono: "0981234567", direccion: "Plaza Central 789", rol: "usuario" as const },
+        { nombre: "Luis Garcia", email: "luis.garcia@example.com", contrasenia: "password101", telefono: "0986789012", direccion: "Barrio Norte 101", rol: "usuario" as const },
+        { nombre: "Sofia Hernandez", email: "sofia.hernandez@example.com", contrasenia: "password202", telefono: "0985432109", direccion: "Zona Sur 202", rol: "usuario" as const },
+        { nombre: "Miguel Torres", email: "miguel.torres@example.com", contrasenia: "password303", telefono: "0984567890", direccion: "Sector Este 303", rol: "admin" as const },
+        { nombre: "Carmen Lopez", email: "carmen.lopez@example.com", contrasenia: "password404", telefono: "0983456789", direccion: "Colonia Oeste 404", rol: "usuario" as const },
+        { nombre: "Roberto Silva", email: "roberto.silva@example.com", contrasenia: "password505", telefono: "0982345678", direccion: "Centro Histórico 505", rol: "usuario" as const },
+        { nombre: "Patricia Morales", email: "patricia.morales@example.com", contrasenia: "password606", telefono: "0981234098", direccion: "Residencial 606", rol: "usuario" as const },
+        { nombre: "Diego Vargas", email: "diego.vargas@example.com", contrasenia: "password707", telefono: "0980987654", direccion: "Urbanización 707", rol: "usuario" as const }
         ];
 
         this.usuarios.push(...datos_usuarios.map(CreadorDeUsuario));
@@ -100,7 +30,7 @@ export class UsuarioRepoMemory implements IUsuarioRepo {
                 if (!usuario) {
                     return callback(new Error("Usuario no proporcionado"));
                 }
-                const nuevoUsuario = CreadorDeUsuario(usuario);
+                const nuevoUsuario = CreadorDeUsuario(usuario as any);
                 const existe = this.usuarios.some( u => u.email === nuevoUsuario.email );
                 if (existe) {
                     return callback(new Error("El usuario ya existe"));
@@ -119,7 +49,7 @@ export class UsuarioRepoMemory implements IUsuarioRepo {
     findById(id: string): Promise<Usuario | null> {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const usuario = this.usuarios.find(u => u.id === id) || null;
+                const usuario = this.usuarios.find(u => u.id_usuario === id) || null;
                 resolve(usuario);
             }, 500);
         });
@@ -143,7 +73,7 @@ export class UsuarioRepoMemory implements IUsuarioRepo {
                     if (!data || Object.keys(data).length === 0) {
                         return reject(new Error("Datos de actualización no proporcionados"));
                     }
-                    const index = this.usuarios.findIndex(u => u.id === id);
+                    const index = this.usuarios.findIndex(u => u.id_usuario === id);
                     if (index === -1) {
                         return reject(new Error("Usuario no encontrado"));
                     }
@@ -173,7 +103,7 @@ export class UsuarioRepoMemory implements IUsuarioRepo {
                     if (!id || id.trim() === "") {
                         return reject(new Error("ID no proporcionado"));
                     }
-                    const index = this.usuarios.findIndex(u => u.id === id);
+                    const index = this.usuarios.findIndex(u => u.id_usuario === id);
                     if (index === -1) {
                         return reject(new Error("Usuario no encontrado"));
                     }
