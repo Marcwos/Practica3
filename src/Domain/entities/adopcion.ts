@@ -19,5 +19,5 @@ export function CreadorDeAdopcion(data: Omit<Adopcion, 'id_adopcion' | 'fecha_ad
         id_adopcion: uuidv4(),
         fecha_adopcion: new Date(),
         ...data
-    };
+    }; 
 }
